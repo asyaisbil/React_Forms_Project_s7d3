@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 
@@ -10,6 +10,11 @@ const initialForm = {
   terms: false,
 };
 
+const errorMessages = {
+  email: 'Please enter a valid email address',
+  password: 'Password must be at least 4 characters long',
+};
+
 export default function Login() {
   const [form, setForm] = useState(initialForm);
 
@@ -17,6 +22,7 @@ export default function Login() {
 
   const handleChange = (event) => {
     let { name, value, type } = event.target;
+    value = type === 'checkbox' ? event.target.checked : value;
     setForm({ ...form, [name]: value });
   };
 
@@ -62,8 +68,18 @@ export default function Login() {
           value={form.password}
         />
       </FormGroup>
-      {/* reactstrap checkbox ekleyelim*/}
-
+      <FormGroup check>
+        <Input
+          id="terms"
+          name="terms"
+          checked={form.terms}
+          type="checkbox"
+          onChange={handleChange}
+        />{' '}
+        <Label htmlFor="terms" check>
+          I agree to terms of service and privacy policy
+        </Label>
+      </FormGroup>
       <FormGroup className="text-center p-4">
         <Button color="primary">Sign In</Button>
       </FormGroup>
