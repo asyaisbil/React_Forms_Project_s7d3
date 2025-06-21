@@ -16,8 +16,7 @@ export default function Login() {
   const history = useHistory();
 
   const handleChange = (event) => {
-    let { name, value, type, checked } = event.target;
-    value = type == 'checkbox' ? checked : value;
+    let { name, value, type } = event.target;
     setForm({ ...form, [name]: value });
   };
 
@@ -64,22 +63,9 @@ export default function Login() {
         />
       </FormGroup>
       {/* reactstrap checkbox ekleyelim*/}
-      <FormGroup check>
-        <Input
-          type="checkbox"
-          name="terms"
-          id="terms"
-          checked={form.terms}
-          onChange={handleChange}
-        />{' '}
-        <Label htmlFor="terms" check>
-          I agree to terms of service and privacy policy{' '}
-        </Label>
-      </FormGroup>
+
       <FormGroup className="text-center p-4">
-        <Button color="primary" disabled={!form.terms}>
-          Sign In
-        </Button>
+        <Button color="primary">Sign In</Button>
       </FormGroup>
     </Form>
   );
